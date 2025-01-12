@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <style>
+      /* style body */
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f9f9f9;
+      }
+
+      .calculator-container {
+        padding: 20px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 4px 6px rgba (0, 0, 0, 0.1);
+      }
+
+      .container-angka {
+        margin-bottom: 15px;
+      }
+
+      .container-tombol {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      /* .container-angka,
+      .container-tombol {
+        margin-bottom: 10px;
+      } */
+
+      .output-area {
+        margin-top: 15px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+      }
+
+      button {
+        margin: 5px;
+        padding: 5px 20px;
+        border: none;
+        width: 60px;
+        height: 60px;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 30px;
+      }
+
+      button:hover {
+        color: black;
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator-container">
+      <!-- Text field untuk bilangan 1 -->
+      <div class="container-angka">
+        <label for="bilangan1">Bilangan 1 : </label>
+        <input type="number" placeholder="masukkan angka " id="bilangan1" />
+      </div>
+
+      <!-- Text field untuk bilangan 2 -->
+      <div class="container-angka">
+        <label for="bilangan2">Bilangan 2 : </label>
+        <input
+          type="number"
+          id="bilangan2"
+          placeholder="masukkan angka"
+          name="bilangan2"
+        />
+      </div>
+      <div class="container-tombol">
+        <!-- Tombol + -->
+        <div class="container-tombol-tambah">
+          <button type="button" id="tombol-tambah">+</button>
+        </div>
+
+        <!-- tombol - -->
+        <div class="container-tombol-kurang">
+          <button type="button" id="tombol-kurang">-</button>
+        </div>
+
+        <!-- Tombol * -->
+        <div class="container-tombol-kali">
+          <button type="button" id="tombol-kali">x</button>
+        </div>
+
+        <!-- Tombol / -->
+        <div class="container-tombol-bagi">
+          <button type="button" id="tombol-bagi">/</button>
+        </div>
+      </div>
+
+      <!-- hasil dari kalkulator -->
+      <div id="hasil" class="output-area">hasil akan ditampilkan disini</div>
+    </div>
+
+    <script>
+      const bilangan1 = document.getElementById("bilangan1");
+      const bilangan2 = document.getElementById("bilangan2");
+      const hasil = document.getElementById("hasil");
+
+      const tombolTambah = document.getElementById("tombol-tambah");
+      const tombolKurang = document.getElementById("tombol-kurang");
+      const tombolKali = document.getElementById("tombol-kali");
+      const tombolBagi = document.getElementById("tombol-bagi");
+
+      function hitung(operator) {
+        const num1 = parseFloat(bilangan1.value);
+        const num2 = parseFloat(bilangan2.value);
+        if (isNaN(num1) || isNaN(num2)) {
+          hasil.textContent = "Masukkan kedua angka!";
+          return;
+        }
+
+        let result;
+
+        switch (operator) {
+          case "+":
+            result = num1 + num2;
+            break;
+          case "-":
+            result = num1 - num2;
+            break;
+          case "x":
+            result = num1 * num2;
+            break;
+          case "/":
+            // if (num2) {
+            //   hasil.textContent = "Tidak dapat membagi dengan nol!";
+            //   return;
+            // }
+            result = num1 / num2;
+            break;
+          default:
+            result = "Eror!";
+        }
+        hasil.textContent = "Hasil : " + result;
+      }
+      tombolTambah.addEventListener("click", () => {
+        // console.log("Tombol + diklik");
+        hitung("+");
+      });
+
+      tombolKurang.addEventListener("click", () => {
+        // console.log("Tombol - diklik");
+        hitung("-");
+      });
+
+      tombolKali.addEventListener("click", () => {
+        // console.log("Tombol x diklik");
+        hitung("x");
+      });
+
+      tombolBagi.addEventListener("click", () => {
+        // console.log("Tombol / diklik");
+        hitung("/");
+      });
+    </script>
+  </body>
+</html>
